@@ -1,0 +1,4 @@
+{"ip":"::1","level":"info","message":"Request received","method":"POST","timestamp":"2024-05-23 07:08:22.270 PM","url":"/crawl/html/single"}
+{"ip":"::1","level":"info","message":"Request received","method":"POST","timestamp":"2024-05-23 07:08:31.335 PM","url":"/crawl/html/single"}
+{"ip":"::1","level":"info","message":"Request received","method":"POST","timestamp":"2024-05-23 07:12:29.421 PM","url":"/crawl/html/single"}
+{"ip":"::1","level":"info","message":"crawling on website https://api.heyrai.com/","method":"POST","timestamp":"2024-05-23 07:12:38.727 PM","url":"/html/single"}
