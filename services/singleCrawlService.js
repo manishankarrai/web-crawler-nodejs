@@ -1,7 +1,8 @@
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
 const fs = require('fs').promises;
-const { generateRandomNumber }  = require('./commonService');
+const axios = require('axios');
+const { generateRandomNumber } = require('./commonService');
 
 
 const fetchContent = async (url) => {
@@ -37,11 +38,10 @@ const crawlPage = async (url) => {
     }
 };
 
-// Download the HTML content of the page to a file
 const downloadHTML = async (url) => {
     try {
         const htmlContent = await fetchContent(url);
-        const fileName = 'public/' + url.replace(/[^a-z0-9]/gi, '_')+ generateRandomNumber()  + '.html';
+        const fileName = 'public/' + url.replace(/[^a-z0-9]/gi, '_') + generateRandomNumber() + '.html';
         await fs.writeFile(fileName, htmlContent);
         return fileName;
     } catch (error) {
@@ -49,4 +49,20 @@ const downloadHTML = async (url) => {
     }
 };
 
-module.exports = { crawlPage, downloadHTML };
+
+const crawlHTMLWithTag = async (url, tags) => {
+    try {
+        console.log(url, tags);
+        const { data } = await axios.get(url);
+        const $ = cheerio.load(data);
+        
+        const elements = tags.map(tag => $(tag.trim()).toArray().map(el => $.html(el))).flat();
+        
+        return elements;
+    } catch (error) {
+        throw new Error(`Error fetching HTML content: ${error.message}`);
+    }
+};
+
+
+module.exports = { crawlPage, downloadHTML, crawlHTMLWithTag };

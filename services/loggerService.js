@@ -3,11 +3,6 @@ const { combine, timestamp, json } = winston.format;
 require('dotenv').config();
 
 
-
-
-
-
-
 const errorFilter = winston.format((info, opts) => {
     return info.level === 'error' ? info : false;
   });
